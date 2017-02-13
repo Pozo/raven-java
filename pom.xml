@@ -10,7 +10,7 @@
 
     <groupId>com.getsentry.raven</groupId>
     <artifactId>raven-all</artifactId>
-    <version>7.8.2-SNAPSHOT</version>
+    <version>7.8.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Raven-Java</name>
@@ -45,9 +45,9 @@
         <developer>
             <id>bretthoerner</id>
             <name>Brett Hoerner</name>
-            <email>brett@sentry.com</email>
+            <email>brett@sentry.io</email>
             <organization>Sentry</organization>
-            <organizationUrl>https://getsentry.com/</organizationUrl>
+            <organizationUrl>https://sentry.io/</organizationUrl>
         </developer>
     </developers>
     <contributors>
@@ -117,9 +117,9 @@
         <maven.compiler.target>7</maven.compiler.target>
 
         <!-- dependencies versions -->
-        <slf4j.version>1.7.21</slf4j.version>
+        <slf4j.version>1.7.22</slf4j.version>
         <findbugs.version>3.0.1</findbugs.version>
-        <jackson.version>2.7.3</jackson.version>
+        <jackson.version>2.7.6</jackson.version>
         <jmockit.version>1.29</jmockit.version>
         <testng.version>6.9.10</testng.version>
         <hamcrest.version>1.3</hamcrest.version>
@@ -260,10 +260,11 @@
                 <plugin>
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
-                    <version>9.3.13.M0</version>
+                    <version>9.2.21.v20170120</version>
                     <configuration>
                         <scanIntervalSeconds>10</scanIntervalSeconds>
                         <stopKey>foo</stopKey>
+                        <stopWait>10</stopWait>
                         <stopPort>9999</stopPort>
                         <war>${project.build.directory}/webapps/sentry-stub.war</war>
                     </configuration>
@@ -311,7 +312,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.10</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <id>analyze</id>
@@ -363,6 +364,14 @@
                         <configLocation>src/checkstyle/checkstyle.xml</configLocation>
                         <consoleOutput>true</consoleOutput>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <!-- 6.19 is the last release that works on JDK7 -->
+                            <version>6.19</version>
+                        </dependency>
+                    </dependencies>
                     <executions>
                         <execution>
                             <id>checkstyle</id>
@@ -381,7 +390,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
@@ -397,7 +406,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.0.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
@@ -527,7 +536,7 @@
                     <plugin>
                         <groupId>org.pitest</groupId>
                         <artifactId>pitest-maven</artifactId>
-                        <version>1.1.10</version>
+                        <version>1.1.11</version>
                         <configuration>
                             <targetTests>
                                 <param>*Test</param>
